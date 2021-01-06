@@ -77,16 +77,16 @@ function treeWalk(nodes, childkey, callback) {
  */
 function treeClean(nodes, childkey) {
 
-    return nodes.map(v => {
+    return nodes.filter(v => v).map(v => {
 
         let flag = v[childkey] && v[childkey].length > 0
         if (flag) {
-            v[childkey] = treeFilter(v[childkey], childkey)
+            v[childkey] = treeClean(v[childkey], childkey)
         }
 
         return v
 
-    }).filter(v => v)
+    })
 }
 
 export {
